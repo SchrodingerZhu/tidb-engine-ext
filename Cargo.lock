@@ -3309,6 +3309,9 @@ dependencies = [
 name = "raftstore-proxy"
 version = "0.0.1"
 dependencies = [
+ "backtrace",
+ "findshlibs",
+ "lazy_static",
  "server",
 ]
 

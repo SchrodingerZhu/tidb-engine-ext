@@ -8,9 +8,8 @@ echo "profile is ${PROXY_PROFILE}"
 echo "engine is ${ENGINE_LABEL_VALUE}"
 echo "prometheus metric name prefix is ${PROMETHEUS_METRIC_NAME_PREFIX}"
 
-lib_suffix="so"
+lib_suffix="a"
 if [[ $(uname -s) == "Darwin" ]]; then
-  lib_suffix="dylib"
   # use the openssl 1.1 lib from system
   export OPENSSL_ROOT_DIR=${OPENSSL_ROOT_DIR:-$(brew --prefix openssl@1.1)}
 
@@ -34,8 +33,3 @@ echo "forcibly remove ${target_path}"
 rm -rf "${target_path}"
 echo "copy ${ori_build_path} to ${target_path}"
 cp "${ori_build_path}" "${target_path}"
-
-if [[ $(uname -s) == "Darwin" ]]; then
-  target_install_name="@rpath/${target_name}"
-  install_name_tool -id "${target_install_name}" "${target_path}"
-fi
